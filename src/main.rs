@@ -17,11 +17,7 @@ fn main() {
     let sdl_context = sdl2::init().unwrap();
     let video_subsystem = sdl_context.video().unwrap();
     let window = video_subsystem
-        .window(
-            "rust-sdl2_gfx: draw line & FPSManager",
-            SCREEN_WIDTH,
-            SCREEN_HEIGHT,
-        )
+        .window("R8", SCREEN_WIDTH, SCREEN_HEIGHT)
         .position_centered()
         .opengl()
         .build()
@@ -34,7 +30,7 @@ fn main() {
 
     let args: Vec<String> = env::args().collect();
     let filename = &args[1];
-    let mut f = File::open(filename).expect("file not found");
+    let mut f = File::open(filename).expect("no such file");
     let mut buffer = [0u8; 3584];
     let bytes_read = if let Ok(bytes_read) = f.read(&mut buffer) {
         bytes_read
